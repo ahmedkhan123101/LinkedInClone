@@ -12,26 +12,19 @@ import {
 
 import { useDispatch } from "react-redux";
 import { logout } from '../redux/slices/authSlice.js'
+import { clearAccessToken } from '../api/axiosInstance.js'
 
 function Navbar(props) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const handleLogout = () => {
-        const refreshToken = localStorage.getItem('refreshToken');
-
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
-        localStorage.clear();
-
         dispatch(logout());
-
+        clearAccessToken();
         navigate('/signin', { replace: true });
 
-        if (refreshToken) {
-            axiosInstance.post('/auth/logout', { refreshToken })
-                .catch(err => console.warn("Logout sync failed", err));
-        }
+        axiosInstance.post('/auth/logout')
+            .catch(err => console.warn("Logout sync failed", err));
     };
 
     const items = [

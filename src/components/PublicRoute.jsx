@@ -1,9 +1,11 @@
 import { Navigate, Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Spin } from "antd";
 
 const PublicRoute = () => {
-    const token = localStorage.getItem('accessToken')
-    //If signed in, show /feed, else show other
-    return token ? <Navigate to='/feed' replace /> : <Outlet />
+    const { isAuthenticated, loading } = useSelector((state) => state.auth);
+    if (loading) return <Spin />;
+    return isAuthenticated ? <Navigate to='/feed' replace /> : <Outlet />
 }
 
 export default PublicRoute;

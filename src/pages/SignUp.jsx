@@ -2,7 +2,8 @@ import { Form, Input, Button, message } from "antd";
 import { useNavigate } from 'react-router-dom';
 import { registerUser } from "../services/authService.js";
 import { useDispatch } from "react-redux";
-import { fetchCurrentUser } from "../redux/slices/authSlice.js";
+import { setAuth } from "../redux/slices/authSlice.js";
+import { setAccessToken } from '../api/axiosInstance.js';
 
 function SignUp() {
 
@@ -17,19 +18,19 @@ function SignUp() {
         try {
             const response = await registerUser(values)
 
-            const accessToken = response?.tokens?.access?.token;
-            const refreshToken = response?.tokens?.refresh?.token;
+            const accessToken = response?.access?.token;
 
             if (accessToken) {
-                localStorage.setItem('accessToken', accessToken);
-                localStorage.setItem('refreshToken', refreshToken);
+                setAccessToken(accessToken)
 
+                dispatch(
+                    setAuth({
+                        user: response.user,
+                        accessToken
+                    })
+                );
                 hideLoading();
                 message.success("Account created successfully!");
-
-                // Update Redux auth state immediately so route guards don't bounce:
-                // /feed -> /signin -> /feed (throttled navigation loop).
-                dispatch(fetchCurrentUser());
                 navigate('/feed');
             } else {
                 throw new Error("Registration failed: No token received.");

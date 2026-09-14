@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../services/authService.js';
 import { useDispatch } from "react-redux";
 import { setAuth } from '../redux/slices/authSlice.js'
+import { setAccessToken } from '../api/axiosInstance.js';
 
 function SignIn() {
     const [form] = Form.useForm();
@@ -13,22 +14,28 @@ function SignIn() {
         const hideLoading = message.loading('Signing in...', 0);
         try {
             const data = await loginUser(values);
-            const accessToken = data?.tokens?.access?.token;
-            const refreshToken = data?.tokens?.refresh?.token;
+            const accessToken = data?.access?.token;
 
             if (accessToken) {
-                localStorage.setItem('accessToken', accessToken);
-                localStorage.setItem('refreshToken', refreshToken);
-                dispatch(setAuth(data.user))
+                setAccessToken(accessToken);
+
+                dispatch(setAuth({
+                    user: data.user,
+                    accessToken
+                }))
+
                 hideLoading();
                 message.success("Signed in successfully!");
                 navigate('/feed');
             } else {
                 throw new Error("Authentication failed: No token received.");
             }
-        } catch (error) {
+        }
+        catch (error) {
             hideLoading();
-            const errorMsg = error.response?.data?.message || error.message || "Failed to sign in.";
+            const errorMsg = error.response?.data?.message ||
+                error.message ||
+                "Failed to sign in.";
             message.error(errorMsg);
         }
     };
