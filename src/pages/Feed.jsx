@@ -5,7 +5,7 @@ import axiosInstance from "../api/axiosInstance";
 import PostModal from "../components/PostModal";
 import PostItem from "../components/PostItem";
 import { useSelector, useDispatch } from "react-redux";
-import { setAuth } from "../redux/slices/authSlice";
+import { updateUser } from "../redux/slices/authSlice";
 
 function Feed() {
 
@@ -50,7 +50,7 @@ function Feed() {
             });
 
             const updatedUser = response.data.user || response.data;
-            dispatch(setAuth(updatedUser))
+            dispatch(updateUser(updatedUser))
             setUploading(false)
             message.success("Profile picture updated!");
         } catch (error) {
