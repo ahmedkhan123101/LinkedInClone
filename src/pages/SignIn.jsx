@@ -20,8 +20,7 @@ function SignIn() {
                 setAccessToken(accessToken);
 
                 dispatch(setAuth({
-                    user: data.user,
-                    accessToken
+                    user: data.user
                 }))
 
                 hideLoading();

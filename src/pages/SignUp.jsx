@@ -26,7 +26,6 @@ function SignUp() {
                 dispatch(
                     setAuth({
                         user: response.user,
-                        accessToken
                     })
                 );
                 hideLoading();
