@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Spin, Empty, message } from "antd";
 import axiosInstance from "../api/axiosInstance";
-import Navbar from "../components/NavBar";
+import Navbar from "../components/Navbar";
 import ActivityPostItem from "../components/ActivityPostItem";
 
 function MyActivity() {

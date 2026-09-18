@@ -8,7 +8,7 @@ import {
     CloseOutlined
 } from '@ant-design/icons';
 import axiosInstance from '../api/axiosInstance';
-import Navbar from '../components/NavBar';
+import Navbar from '../components/Navbar';
 
 const Network = () => {
 

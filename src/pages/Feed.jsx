@@ -1,5 +1,5 @@
 import { Button, Dropdown, message, Spin } from "antd";
-import Navbar from "../components/NavBar";
+import Navbar from "../components/Navbar";
 import { useState, useEffect, useRef } from "react";
 import axiosInstance from "../api/axiosInstance";
 import PostModal from "../components/PostModal";
