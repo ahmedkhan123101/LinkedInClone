@@ -90,6 +90,7 @@ const Network = () => {
             await axiosInstance.delete(`/connections/remove/${connectionId}`);
 
             setConnectedConnections(prev => prev.filter(conn => conn._id !== connectionId));
+            setConnections(prev => prev.filter(conn => conn._id !== connectionId))
             message.success("Connection removed");
         } catch (error) {
             message.error("Failed to remove connection");
