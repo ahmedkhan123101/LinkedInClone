@@ -3,6 +3,7 @@ import { Button, Space, Divider, message, Popconfirm } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import axiosInstance from "../api/axiosInstance";
 import EditPostModal from "./EditPostModal";
+import avatarDefault from '../assets/avatar-colorful-48.png';
 
 const ActivityPostItem = ({ post: initialPost, onDeleteSuccess, user }) => {
     const [post, setPost] = useState(initialPost);
@@ -66,7 +67,7 @@ const ActivityPostItem = ({ post: initialPost, onDeleteSuccess, user }) => {
             <div className="flex justify-between items-start px-4 mb-2">
                 <div className="flex gap-2">
                     <img
-                        src={post.author?.profilePicture || "src/assets/avatar-colorful-48.png"}
+                        src={post.author?.profilePicture || avatarDefault}
                         className="w-12 h-12 rounded-full"
                         alt="User"
                     />
@@ -125,7 +126,7 @@ const ActivityPostItem = ({ post: initialPost, onDeleteSuccess, user }) => {
                 <div className="px-4 mt-4 space-y-3">
                     {comments.map((comment) => (
                         <div key={comment._id} className="flex gap-2">
-                            <img src={comment.author?.profilePicture || "src/assets/avatar-colorful-48.png"} className="w-8 h-8 rounded-full" alt="user" />
+                            <img src={comment.author?.profilePicture || avatarDefault} className="w-8 h-8 rounded-full" alt="user" />
                             <div className="flex-1 bg-gray-100 p-2 rounded-lg">
                                 <p className="font-bold text-[12px]">{comment.author?.name} {comment.author?.lastName}</p>
                                 <p className="text-sm">{comment.content}</p>

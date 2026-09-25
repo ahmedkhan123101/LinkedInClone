@@ -10,6 +10,7 @@ import EducationModal from "../components/EducationModal";
 import AllSkillsModal from "../components/AllSkillsModal";
 
 import Navbar from "../components/Navbar";
+import avatarDefault from "../assets/avatar-colorful-48.png";
 
 const Profile = () => {
     const navigate = useNavigate();
@@ -81,7 +82,7 @@ const Profile = () => {
                             <input id="avatar-upload-input" type="file" hidden accept="image/*" onChange={handleAvatarChange} />
                             <Avatar
                                 size={150}
-                                src={user?.profilePicture || "src/assets/avatar-colorful-48.png"}
+                                src={user?.profilePicture || avatarDefault}
                                 className="border-4 border-white shadow-md bg-white cursor-pointer hover:brightness-90 transition-all"
                                 onClick={handleAvatarClick}
                             />

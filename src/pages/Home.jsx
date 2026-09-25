@@ -1,5 +1,7 @@
 import { Button } from "antd";
 import Hero from '../assets/LinkedInHeroImage.svg'
+import googleIcon from '../assets/google-white-48.png'
+import microsoftIcon from '../assets/microsoft-white-48.png'
 import { useNavigate } from 'react-router-dom';
 
 function Home() {
@@ -26,7 +28,7 @@ function Home() {
                                 onClick={() => console.log("Google login clicked")}
                             >
                                 <img
-                                    src="src\assets\google-white-48.png"
+                                    src={googleIcon}
                                     alt="Google"
                                     className="w-5 h-5 mr-2"
                                 />
@@ -40,7 +42,7 @@ function Home() {
                                 onClick={() => console.log("Microsoft login clicked")}
                             >
                                 <img
-                                    src="src\assets\microsoft-white-48.png"
+                                    src={microsoftIcon}
                                     alt="Microsoft"
                                     className="w-5 h-5 mr-2"
                                 />

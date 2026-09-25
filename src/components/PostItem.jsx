@@ -3,6 +3,8 @@ import { Button, Input, message } from "antd"
 
 import likeIcon from "../assets/icons8-like-16.png";
 import likeBlueIcon from "../assets/icons8-like-blue-16.png";
+import avatarDefault from "../assets/avatar-colorful-48.png";
+import earthIcon from "../assets/earth-black-24.png";
 
 import axiosInstance from '../api/axiosInstance.js'
 
@@ -91,13 +93,13 @@ const PostItem = ({ post, user, handleLike, updateCommentCount }) => {
         <div className="bg-white rounded-lg border border-gray-200 overflow-hidden mb-4">
             {/* Post Header */}
             <div className="flex p-4 gap-2">
-                <img src={post.author?.profilePicture || "src/assets/avatar-colorful-48.png"} className="w-12 h-12 rounded-full" alt="Profile" />
+                <img src={post.author?.profilePicture || avatarDefault} className="w-12 h-12 rounded-full" alt="Profile" />
                 <div>
                     <p className="font-semibold text-sm">{post.author?.name} {post.author?.lastName}</p>
                     <p className="text-xs text-gray-500">Software Intern at Shifa</p>
                     <div className="flex items-center gap-1 text-xs text-gray-400">
                         <span>{new Date(post.createdAt).toLocaleDateString()}</span>
-                        <img src="src/assets/earth-black-24.png" className="w-3 h-3" alt="Public" />
+                        <img src={earthIcon} className="w-3 h-3" alt="Public" />
                     </div>
                 </div>
             </div>
@@ -142,7 +144,7 @@ const PostItem = ({ post, user, handleLike, updateCommentCount }) => {
                 {/* Comment Input Bar */}
                 <div className="flex flex-row items-start gap-3 mb-4">
                     <img
-                        src={user?.profilePicture || "src/assets/avatar-colorful-48.png"}
+                        src={user?.profilePicture || avatarDefault}
                         alt="Avatar"
                         className="object-cover rounded-full h-[32px] w-[32px] mt-1"
                     />
@@ -184,7 +186,7 @@ const PostItem = ({ post, user, handleLike, updateCommentCount }) => {
                     <div className="space-y-3 mt-4">
                         {comments.map((comment) => (
                             <div key={comment._id} className="flex gap-2">
-                                <img src={comment.author?.profilePicture || "src/assets/avatar-colorful-48.png"} className="w-8 h-8 rounded-full" alt="user" />
+                                <img src={comment.author?.profilePicture || avatarDefault} className="w-8 h-8 rounded-full" alt="user" />
                                 <div className="flex-1">
                                     <div className="bg-gray-100 p-2 rounded-lg">
                                         <p className="font-bold text-[12px]">{comment.author?.name} {comment.author?.lastName}</p>

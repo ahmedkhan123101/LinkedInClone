@@ -6,6 +6,8 @@ import PostModal from "../components/PostModal";
 import PostItem from "../components/PostItem";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUser } from "../redux/slices/authSlice";
+import avatarDefault80 from "../assets/avatar-colorful-80.png";
+import avatarDefault48 from "../assets/avatar-colorful-48.png";
 
 function Feed() {
 
@@ -152,7 +154,7 @@ function Feed() {
                     >
                         <div className="relative">
                             <img
-                                src={user?.profilePicture || "src/assets/avatar-colorful-80.png"}
+                                src={user?.profilePicture || avatarDefault80}
                                 alt="Avatar"
                                 className="w-16 h-16 rounded-full border-2 border-white shadow-sm object-cover"
                             />
@@ -186,7 +188,7 @@ function Feed() {
                         {/* Start a post box */}
                         <div className="bg-white rounded-lg border border-gray-200 p-4 w-full max-w-[555px]">
                             <div className="flex gap-2 items-center">
-                                <img src={user?.profilePicture || "src/assets/avatar-colorful-48.png"} className="w-12 h-12 rounded-full" alt="Avatar" />
+                                <img src={user?.profilePicture || avatarDefault48} className="w-12 h-12 rounded-full" alt="Avatar" />
                                 <Button
                                     onClick={showModal}
                                     className="flex-grow rounded-full text-left px-5 h-12 text-gray-500 font-semibold hover:bg-gray-100"
@@ -218,7 +220,7 @@ function Feed() {
 
                         {[1, 2, 3].map((item) => (
                             <div key={item} className="flex gap-3 mb-4">
-                                <img src="src/assets/avatar-colorful-48.png" className="w-12 h-12 rounded-full" alt="Avatar" />
+                                <img src={avatarDefault48} className="w-12 h-12 rounded-full" alt="Avatar" />
                                 <div>
                                     <p className="font-semibold text-sm">Name</p>
                                     <p className="text-xs text-gray-500 mb-2">Designation</p>

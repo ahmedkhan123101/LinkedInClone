@@ -14,6 +14,11 @@ import { useDispatch } from "react-redux";
 import { logout } from '../redux/slices/authSlice.js'
 import { clearAccessToken } from '../api/axiosInstance.js'
 
+import logo from '../assets/linkedin-colorful-34.png'
+import avatarDefault from '../assets/avatar-colorful-24.png'
+import peopleFilled from '../assets/people-filled.png'
+import peopleOutlined from '../assets/people-outlined.png'
+
 function Navbar(props) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -65,16 +70,16 @@ function Navbar(props) {
         <div className="flex h-[55px] bg-white mb-[20px] items-center justify-center sticky top-0 z-50 shadow-sm">
             <div className="flex w-[97%] flex-row items-center justify-between">
                 <div className="shrink-0 cursor-pointer" onClick={() => navigate('/feed')}>
-                    <img src="src/assets/linkedin-colorful-34.png" alt="Logo" />
+                    <img src={logo} alt="Logo" />
                 </div>
 
                 <div className="flex flex-row items-center">
                     <NavItem path='/feed' filledIcon={<HomeFilled />} outlinedIcon={<HomeOutlined />} label="Home" onClick={() => navigate('/feed')} />
-                    <NavItem path='/network' filledIcon={<img src='src/assets/people-filled.png' />} outlinedIcon={<img src='src/assets/people-outlined.png' />} label="My Network" onClick={() => navigate('/network')} />
+                    <NavItem path='/network' filledIcon={<img src={peopleFilled} />} outlinedIcon={<img src={peopleOutlined} />} label="My Network" onClick={() => navigate('/network')} />
 
                     <Dropdown menu={{ items }} trigger={['click']} placement="bottomRight" arrow>
                         <div className="flex flex-col items-center cursor-pointer w-[75px] max-[747px]:w-[50px]">
-                            <img src={props.user?.profilePicture || "src/assets/avatar-colorful-24.png"} alt="Me" className="rounded-full w-6 h-6 border border-gray-200" />
+                            <img src={props.user?.profilePicture || avatarDefault} alt="Me" className="rounded-full w-6 h-6 border border-gray-200" />
                             <div className="flex flex-row items-center">
                                 <CaretDownFilled />
                             </div>

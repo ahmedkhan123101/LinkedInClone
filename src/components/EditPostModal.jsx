@@ -3,6 +3,7 @@ import { Input, Button, message, Modal, Spin } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
 import axiosInstance from "../api/axiosInstance";
 import cameraIcon from '../assets/camera-30.png';
+import avatarDefault from '../assets/avatar-colorful-48.png';
 
 const EditPostModal = ({ isModalOpen, setIsModalOpen, post, onUpdateSuccess, user }) => {
     const [postContent, setPostContent] = useState("");
@@ -121,7 +122,7 @@ const EditPostModal = ({ isModalOpen, setIsModalOpen, post, onUpdateSuccess, use
             <input type="file" ref={fileInputRef} onChange={handleFileChange} multiple hidden accept="image/*" />
 
             <div className="flex items-center gap-2 mb-4">
-                <img src={user?.profilePicture || "src/assets/avatar-colorful-48.png"} className="w-10 h-10 rounded-full" alt="User" />
+                <img src={user?.profilePicture || avatarDefault} className="w-10 h-10 rounded-full" alt="User" />
                 <p className="font-semibold">{user?.name} {user?.lastName}</p>
             </div>
 
