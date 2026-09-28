@@ -1,3 +1,5 @@
+import { useState, useRef } from "react";
+
 import { Form, Input, Button, message } from "antd";
 import { useNavigate } from 'react-router-dom';
 import { registerUser } from "../services/authService.js";
@@ -12,7 +14,15 @@ function SignUp() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    const [submitting, setSubmitting] = useState(false);
+    const submittingRef = useRef(false);
+
     const onFinish = async (values) => {
+
+        if (submittingRef.current) return;
+        submittingRef.current = true;
+        setSubmitting(true)
+
         const hideLoading = message.loading('Creating your account...', 0);
 
         try {
@@ -38,6 +48,9 @@ function SignUp() {
             hideLoading();
             const errorMsg = error.response?.data?.message || error.message || "Failed to register.";
             message.error(errorMsg);
+        } finally {
+            submittingRef.current = false
+            setSubmitting(false)
         }
     };
 
@@ -152,7 +165,9 @@ function SignUp() {
 
                     {/* Submit */}
                     <Form.Item>
-                        <Button className="!bg-[#004182] !rounded-[50px] !py-[25px]" type="primary" htmlType="submit" block>
+                        <Button className="!bg-[#004182] !rounded-[50px] !py-[25px]" type="primary" htmlType="submit" block
+                            loading={submitting}
+                            disabled={submitting}>
                             <span className="text-white font-semibold">Agree and Join</span>
                         </Button>
                     </Form.Item>

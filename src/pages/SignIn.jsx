@@ -1,3 +1,4 @@
+import { useState, useRef } from "react";
 import { Form, Input, Button, message } from "antd";
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../services/authService.js';
@@ -6,11 +7,19 @@ import { setAuth } from '../redux/slices/authSlice.js'
 import { setAccessToken } from '../api/axiosInstance.js';
 
 function SignIn() {
+
     const [form] = Form.useForm();
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    const [submitting, setSubmitting] = useState(false);
+    const submittingRef = useRef(false);
+
     const onFinish = async (values) => {
+        if (submittingRef.current) return;
+        submittingRef.current = true;
+        setSubmitting(true);
+
         const hideLoading = message.loading('Signing in...', 0);
         try {
             const data = await loginUser(values);
@@ -36,6 +45,9 @@ function SignIn() {
                 error.message ||
                 "Failed to sign in.";
             message.error(errorMsg);
+        } finally {
+            submittingRef.current = false;
+            setSubmitting(false);
         }
     };
 
@@ -87,6 +99,8 @@ function SignIn() {
                             className="!bg-[#004182] !rounded-[50px] !h-[50px]"
                             type="primary"
                             htmlType="submit"
+                            loading={submitting}
+                            disabled={submitting}
                             block
                         >
                             <span className="text-white font-semibold text-lg">Sign In</span>
