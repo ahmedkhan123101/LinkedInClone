@@ -46,7 +46,9 @@ const Profile = () => {
         formData.append("image", file);
         try {
             setLoading(true);
-            const res = await axiosInstance.patch("/auth/me/avatar", formData);
+            const res = await axiosInstance.patch("/auth/me/avatar", formData, {
+                headers: { 'Content-Type': 'multipart/form-data' }
+            });
             setUser({ ...user, profilePicture: res.data.profilePicture });
             message.success("Profile picture updated");
         } catch (err) {
