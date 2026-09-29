@@ -1,3 +1,7 @@
+## Live Demo
+   https://linked-in-clone-mu-pearl.vercel.app
+   Demo login: demo@example.com / Demo1234!
+
 # LinkedIn Clone
 
 A full-featured LinkedIn clone built with **React 19** and **Vite**, replicating core professional networking functionality with a modern frontend stack.
