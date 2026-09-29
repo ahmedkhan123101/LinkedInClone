@@ -70,6 +70,11 @@ const Profile = () => {
 
     return (
         <div className="bg-[#f4f2ee] min-h-screen">
+            {loading && user && (
+                <div className="fixed inset-0 bg-black/40 z-[9999] flex items-center justify-center">
+                    <Spin size="large" tip="Uploading..." />
+                </div>
+            )}
             <Navbar user={user} />
             <div className="max-w-4xl mx-auto py-8 px-4">
                 {/* Intro Card */}
