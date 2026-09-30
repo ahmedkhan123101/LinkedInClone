@@ -10,9 +10,10 @@ export const fetchCurrentUser = createAsyncThunk(
             const response = await axiosInstance.get("/auth/me")
             return response.data
         } catch (error) {
-            return rejectWithValue(
-                error.response?.data?.message || "Failed to fetch user."
-            )
+            if (!error.response) {
+                return rejectWithValue("Network Error")
+            }
+            return rejectWithValue(error.response?.data?.message || "Failed to fetch user.")
         }
     }
 )
@@ -52,10 +53,12 @@ const authSlice = createSlice({
                 state.user = action.payload
             })
 
-            .addCase(fetchCurrentUser.rejected, (state) => {
+            .addCase(fetchCurrentUser.rejected, (state, action) => {
                 state.loading = false
-                state.isAuthenticated = false
-                state.user = null
+                if (action.payload !== "Network Error") {
+                    state.isAuthenticated = false
+                    state.user = null
+                }
             })
     }
 })
